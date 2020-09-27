@@ -27,3 +27,20 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The software depends on Beautiful Soup library, which is available under the 
+MIT license. Copyright (c) 2004-2019 Leonard Richardson
+
+The software requires click library, which is also available under the BSD 
+3-Clause license. Copyright 2014 Pallets
+
+THe software incorporates code from lxml, which is available under the BSD 
+3-Clause license. Copyright (c) 2004 Infrae. All rights reserved.
+
+The software uses requests library, which is licensed under the Apache 
+license. Copyright 2019 Kenneth Reitz
+
+The software uses pandas library, which is licensed under the BSD 
+3-Clause license. Copyright (c) 2008-2011, AQR Capital Management, LLC, 
+Lambda Foundry, Inc. and PyData Development Team All rights reserved. 
+Copyright (c) 2011-2020, Open source contributors.

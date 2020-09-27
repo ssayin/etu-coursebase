@@ -3,7 +3,8 @@ CLI for ETU Coursebase
 
 ## How to use
 
-```sh # cd into local repo
+```sh 
+# cd into local repo
 cd etu-coursebase
 # create a virtual environment
 virtualenv venv
@@ -14,7 +15,7 @@ pip install .
 # fetch course data (one time only)
 coursebase generate
 ```
-Create json file named courses.json with content similar to the one below.
+Create json file named **courses.json** with content similar to the one below.
 ```json
 {
   "lookFor": [
@@ -27,8 +28,9 @@ Create json file named courses.json with content similar to the one below.
 }
 ```
 
-```sh # run
-
+```sh 
+# run
+coursebase schedule
 ```
 ## License
 [BSD 3](LICENSE)

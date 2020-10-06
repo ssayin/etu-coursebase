@@ -9,7 +9,6 @@ setup(
     license="BSD",
     py_module=['coursebase'],
     install_requires=[
-        'Click',
         'lxml',
         'beautifulsoup4',
         'requests',
@@ -17,6 +16,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        coursebase=coursebase:cli
+        coursebase=coursebase:main
     ''',
 )

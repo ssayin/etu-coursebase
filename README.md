@@ -1,4 +1,6 @@
 # etu-coursebase
+![ci](https://github.com/ssayin/etu-coursebase/workflows/ci/badge.svg)
+
 CLI for ETU Coursebase
 
 ## How to use

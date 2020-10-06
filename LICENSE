@@ -31,9 +31,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The software depends on Beautiful Soup library, which is available under the 
 MIT license. Copyright (c) 2004-2019 Leonard Richardson
 
-The software requires click library, which is also available under the BSD 
-3-Clause license. Copyright 2014 Pallets
-
 THe software incorporates code from lxml, which is available under the BSD 
 3-Clause license. Copyright (c) 2004 Infrae. All rights reserved.
 

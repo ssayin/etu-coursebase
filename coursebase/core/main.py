@@ -1,36 +1,31 @@
 from coursebase.extractors.extractors import get_schedule
 from coursebase.filter.util import get_day_index, get_time_index
-from coursebase.extractors.data import CacheData
-from coursebase import CACHE_DIR, CONFIG_DIR, CONFIG_FILE, CACHE_FILE
-import os
-import os.path
+from coursebase.extractors.data import ConfigData, CacheData
 import pandas as pd
 import sys
+from pathlib import Path
+from coursebase import CONFIG_FILE, CACHE_FILE, CONFIG_DIR, CACHE_DIR
+from typing import Iterator
 
 
-def try_to_access(path):
-    try:
-        absp = os.path.abspath(path)
-    except OSError as err:
-        sys.stderr.write("Cannot access {0}\n{1}\n".format(absp, str(err)))
-        sys.exit(1)
-    if os.path.exists(absp) and not os.access(absp, os.W_OK):
-        # sys.stderr.write('No write access in {0}\n'.format(absp))
-        sys.exit(1)
-    return absp
+def ensure_paths_exist(paths: Iterator[Path]) -> None:
+    for path in paths:
+        if not path.exists() or not path.is_dir():
+            print("Creating directory {0}".format(path))
+            path.mkdir()
 
 
 def main():
-    cache = try_to_access(CACHE_DIR)
-    config = try_to_access(CONFIG_DIR)
+    ensure_paths_exist([CONFIG_DIR, CACHE_DIR])
 
-    if not os.path.isfile("{0}/{1}".format(config, CONFIG_FILE)):
-        sys.stderr.write("Please create config.json in {0}\n".format(str(config)))
+    if not CACHE_FILE.is_file():
+        print("Downloading course cache.")
+        CacheData().write()
+        print("Done.")
+
+    if not CONFIG_FILE.is_file():
+        print("Please create {0}".format(CONFIG_FILE))
         sys.exit(1)
-
-    if not os.path.isfile("{0}/{1}".format(cache, CACHE_FILE)):
-        dt = CacheData()
-        dt.write()
 
     args, options = parse()
     df = pd.DataFrame(get_schedule())

@@ -36,10 +36,10 @@ class ConfigData:
         pass
 
     def write(self, courses: list):
-        with open("{0}/courses.json".format(CONFIG_DIR), "w") as f:
+        with open("{0}/config.json".format(CONFIG_DIR), "w") as f:
             json.dump({'lookFor': courses}, f, ensure_ascii = False)
 
 
     def read(self):
-        with open("{0}/courses.json".format(CONFIG_DIR), "r") as f:
+        with open("{0}/config.json".format(CONFIG_DIR), "r") as f:
             return json.loads(f.read())['lookFor']

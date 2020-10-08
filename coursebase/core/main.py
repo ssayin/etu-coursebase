@@ -22,14 +22,7 @@ def ensure_paths_exist(paths: Iterator[Path]) -> None:
 
 
 def main():
-    args, options = parse()
-    if args.verbose:
-        console.setLevel(logging.INFO)
-        log.setLevel(logging.INFO)
-    if args.today and args.now:
-        print("--today and --now are mutually exclusive")
-        sys.exit(0)
-
+    options, args = parse()
     ensure_paths_exist([CONFIG_DIR, CACHE_DIR])
 
     if not CACHE_FILE.is_file():
@@ -42,9 +35,9 @@ def main():
         sys.exit(1)
 
     df = pd.DataFrame(get_schedule())
-    if args.today:
+    if options.today:
         df = df.iloc[:, [0, get_day_index()]]
-    elif args.now:
+    elif options.now:
         df = df.iloc[get_time_index(), get_day_index()]
         if df == "":
             print("Great news, no class at the moment.")
@@ -65,5 +58,14 @@ def parse():
     )
     parser.add_option("-t", "--today", action="store_true", dest="today", default=False)
     parser.add_option("-n", "--now", action="store_true", dest="now", default=False)
+
     options, args = parser.parse_args()
+
+    if options.verbose:
+        console.setLevel(logging.INFO)
+        log.setLevel(logging.INFO)
+    if options.today and options.now:
+        print("--today and --now are mutually exclusive")
+        sys.exit(0)
+
     return options, args

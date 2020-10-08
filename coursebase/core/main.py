@@ -1,48 +1,59 @@
 from coursebase.extractors.extractors import get_schedule
 from coursebase.filter.util import get_day_index, get_time_index
-from coursebase.extractors.data import ConfigData, CacheData
 import pandas as pd
 import sys
 from pathlib import Path
 from coursebase import CONFIG_FILE, CACHE_FILE, CONFIG_DIR, CACHE_DIR
 from typing import Iterator
+from coursebase.extractors.data import CacheData
+
+import logging
+
+log = logging.getLogger()
+console = logging.StreamHandler()
+log.addHandler(console)
 
 
 def ensure_paths_exist(paths: Iterator[Path]) -> None:
     for path in paths:
         if not path.exists() or not path.is_dir():
-            print("Creating directory {0}".format(path))
+            log.info("Creating directory {0}".format(path))
             path.mkdir()
 
 
 def main():
-    ensure_paths_exist([CONFIG_DIR, CACHE_DIR])
-
-    if not CACHE_FILE.is_file():
-        print("Downloading course cache.")
-        CacheData().write()
-        print("Done.")
-
-    if not CONFIG_FILE.is_file():
-        print("Please create {0}".format(CONFIG_FILE))
-        sys.exit(1)
-
     args, options = parse()
-    df = pd.DataFrame(get_schedule())
+    if args.verbose:
+        console.setLevel(logging.INFO)
+        log.setLevel(logging.INFO)
     if args.today and args.now:
         print("--today and --now are mutually exclusive")
         sys.exit(0)
+
+    ensure_paths_exist([CONFIG_DIR, CACHE_DIR])
+
+    if not CACHE_FILE.is_file():
+        log.info("Downloading course cache.")
+        CacheData().write()
+        log.info("Downloaded course cache.")
+
+    if not CONFIG_FILE.is_file():
+        log.error("Please create {0}".format(CONFIG_FILE))
+        sys.exit(1)
+
+    df = pd.DataFrame(get_schedule())
     if args.today:
         df = df.iloc[:, [0, get_day_index()]]
-        print(df.to_string(index=False))
     elif args.now:
         df = df.iloc[get_time_index(), get_day_index()]
         if df == "":
-            print("Great news, no class at the moment.\n")
+            print("Great news, no class at the moment.")
+            sys.exit(0)
         else:
             print(df)
-    else:
-        print(df.to_string(index=False))
+            sys.exit(0)
+
+    print(df.to_string(index=False))
 
 
 def parse():

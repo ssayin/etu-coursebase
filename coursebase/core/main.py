@@ -6,7 +6,6 @@ from pathlib import Path
 from coursebase import CONFIG_FILE, CACHE_FILE, CONFIG_DIR, CACHE_DIR
 from typing import Iterator
 from coursebase.extractors.data import CacheData
-
 import logging
 
 log = logging.getLogger()

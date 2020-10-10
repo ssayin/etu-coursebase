@@ -8,10 +8,6 @@ CLI for ETU Coursebase
 ```sh 
 # cd into local repo
 cd etu-coursebase
-# create a virtual environment
-virtualenv venv
-# switch to venv
-. venv/bin/activate
 # install
 pip install .
 ```

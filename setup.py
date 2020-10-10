@@ -7,7 +7,6 @@ setup(
     author_email="nefer.kha.ptah@gmail.com",
     description="CLI for TOBB ETU Coursebase",
     license="BSD",
-    py_module=["coursebase"],
     install_requires=[
         "lxml",
         "beautifulsoup4",
@@ -18,4 +17,10 @@ setup(
         [console_scripts]
         coursebase=coursebase:main
     """,
+    packages={
+        'coursebase',
+        'coursebase.core',
+        'coursebase.extractors',
+        'coursebase.filter',
+    }
 )

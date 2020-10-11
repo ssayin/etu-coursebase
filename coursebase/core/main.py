@@ -10,7 +10,6 @@ from coursebase.filter.util import get_day_index, get_time_index
 from coursebase import CONFIG_FILE, CACHE_FILE, CONFIG_DIR, CACHE_DIR
 from coursebase.extractors.data import write_cache
 
-
 log = logging.getLogger()
 console = logging.StreamHandler()
 log.addHandler(console)
@@ -36,7 +35,8 @@ def main():
         log.error("Please create {0}".format(CONFIG_FILE))
         sys.exit(1)
 
-    df = pd.DataFrame(get_schedule())
+    # df = pd.DataFrame(get_schedule())
+    df = get_schedule()
     if options.today:
         df = df.iloc[:, [0, get_day_index()]]
     elif options.now:
@@ -55,11 +55,21 @@ def parse():
     from optparse import OptionParser
 
     parser = OptionParser()
-    parser.add_option(
-        "-v", "--verbose", action="store_true", dest="verbose", default=False
-    )
-    parser.add_option("-t", "--today", action="store_true", dest="today", default=False)
-    parser.add_option("-n", "--now", action="store_true", dest="now", default=False)
+    parser.add_option("-v",
+                      "--verbose",
+                      action="store_true",
+                      dest="verbose",
+                      default=False)
+    parser.add_option("-t",
+                      "--today",
+                      action="store_true",
+                      dest="today",
+                      default=False)
+    parser.add_option("-n",
+                      "--now",
+                      action="store_true",
+                      dest="now",
+                      default=False)
 
     options, args = parser.parse_args()
 

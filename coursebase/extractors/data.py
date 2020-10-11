@@ -19,9 +19,8 @@ def write_cache() -> None:
     soup = get_soup(URL_COURSEBASE)
     courses: dict = []
     for a in [
-        x
-        for x in soup.find_all("select")
-        if x.has_attr("name") and x["name"] == "courses[]"
+            x for x in soup.find_all("select")
+            if x.has_attr("name") and x["name"] == "courses[]"
     ]:
         for b in a.find_all("option"):
             courses.append({"i": b["value"], "n": b.text})

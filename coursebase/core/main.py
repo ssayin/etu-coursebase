@@ -1,12 +1,15 @@
+import logging
+from pathlib import Path
+import sys
+from typing import Iterator
+
+import pandas as pd
+
 from coursebase.extractors.extractors import get_schedule
 from coursebase.filter.util import get_day_index, get_time_index
-import pandas as pd
-import sys
-from pathlib import Path
 from coursebase import CONFIG_FILE, CACHE_FILE, CONFIG_DIR, CACHE_DIR
-from typing import Iterator
 from coursebase.extractors.data import write_cache
-import logging
+
 
 log = logging.getLogger()
 console = logging.StreamHandler()

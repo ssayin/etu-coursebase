@@ -18,9 +18,9 @@ setup(
         coursebase=coursebase:main
     """,
     packages={
-        'coursebase',
-        'coursebase.core',
-        'coursebase.extractors',
-        'coursebase.filter',
-    }
+        "coursebase",
+        "coursebase.core",
+        "coursebase.extractors",
+        "coursebase.filter",
+    },
 )

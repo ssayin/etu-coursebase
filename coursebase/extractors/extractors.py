@@ -1,10 +1,4 @@
-from bs4 import BeautifulSoup
-from coursebase.extractors.data import get_soup_post, ConfigData, CacheData
-
-
-class CourseTblExtractor:
-    def __init__(self):
-        pass
+from coursebase.extractors.data import get_soup_post, read_config, read_cache
 
 
 def ext_tags(cell):
@@ -54,4 +48,4 @@ def get_schedule():
 
 
 def gen_post_data() -> dict:
-    return {"courses[]": [CacheData().read()[look] for look in ConfigData().read()]}
+    return {"courses[]": [read_cache()[look] for look in read_config()]}

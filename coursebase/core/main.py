@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 from coursebase import CONFIG_FILE, CACHE_FILE, CONFIG_DIR, CACHE_DIR
 from typing import Iterator
-from coursebase.extractors.data import CacheData
+from coursebase.extractors.data import write_cache
 import logging
 
 log = logging.getLogger()
@@ -26,7 +26,7 @@ def main():
 
     if not CACHE_FILE.is_file():
         log.info("Downloading course cache.")
-        CacheData().write()
+        write_cache()
         log.info("Downloaded course cache.")
 
     if not CONFIG_FILE.is_file():

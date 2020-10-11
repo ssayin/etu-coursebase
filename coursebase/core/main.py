@@ -35,7 +35,6 @@ def main():
         log.error("Please create {0}".format(CONFIG_FILE))
         sys.exit(1)
 
-    # df = pd.DataFrame(get_schedule())
     df = get_schedule()
     if options.today:
         df = df.iloc[:, [0, get_day_index()]]

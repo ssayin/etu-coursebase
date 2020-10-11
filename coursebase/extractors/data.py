@@ -17,7 +17,7 @@ def get_soup_post(url, data):
 
 def write_cache() -> None:
     soup = get_soup(URL_COURSEBASE)
-    courses: dict = []
+    courses: list = []
     for a in [
             x for x in soup.find_all("select")
             if x.has_attr("name") and x["name"] == "courses[]"

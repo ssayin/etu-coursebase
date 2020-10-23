@@ -23,7 +23,8 @@ def write_cache() -> None:
             if x.has_attr("name") and x["name"] == "courses[]"
     ]:
         for b in a.find_all("option"):
-            courses.append({"i": b["value"], "n": b.text})
+            courses.append({"i": b["value"], "n": "İKT 103" 
+                            if b.text == "İKT 103-İ" else b.text})
 
     with open(CACHE_FILE, "w") as out:
         json.dump({"c": courses}, out, ensure_ascii=False)

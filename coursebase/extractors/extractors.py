@@ -1,6 +1,6 @@
+import re
 import pandas as pd
 from coursebase.extractors.data import get_soup_post, read_config, read_cache
-
 
 def ext_tags(cell):
     return [
@@ -10,8 +10,8 @@ def ext_tags(cell):
 
 
 def process_str(tag):
-    tmp = tag.text.replace("\n", " ").replace("ID Bekleniyor.", "")
-    return (tmp[:9] + " " + tmp[9:]).strip() + " "
+    p = re.match(r'(?P<name>\b[\w\s]+\.\d)(?P<id>[\w\d\s]+)\b\s*', tag.text)
+    return p.groupdict()['name'] + " " + p.groupdict()['id'] + " "
 
 
 def ext_row_text(cell):

@@ -2,6 +2,7 @@ import logging
 from pathlib import Path
 import sys
 from typing import Iterator
+from tabulate import tabulate
 
 import pandas as pd
 
@@ -42,12 +43,11 @@ def main():
         df = df.iloc[get_time_index(), get_day_index()]
         if df == "":
             print("Great news, no class at the moment.")
-            sys.exit(0)
         else:
             print(df)
-            sys.exit(0)
+        sys.exit(0)
 
-    print(df.to_string(index=False))
+    print(tabulate(df, headers='keys', tablefmt='fancy_grid', showindex=False))
 
 
 def parse():

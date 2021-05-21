@@ -11,7 +11,7 @@ def ext_tags(cell):
 
 def process_str(tag):
     p = re.match(r'(?P<name>\b[\w\s]+\.\d)(?P<id>[\w\d\s]+)\b\s*', tag.text)
-    return p.groupdict()['name'] + " " + p.groupdict()['id'] + " "
+    return p.groupdict()['name'] + " " + p.groupdict()['id'] + "\n"
 
 
 def ext_row_text(cell):

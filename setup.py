@@ -12,6 +12,7 @@ setup(
         "beautifulsoup4",
         "requests",
         "pandas",
+        "tabulate",
     ],
     entry_points="""
         [console_scripts]
